@@ -1,17 +1,17 @@
 # siat-gpl
 Sistema Integral de Administración Tributaria (SIAT-GPL)
 
-# Descargar e Instalar Siat 1.0
+## Descargar e Instalar Siat 1.0
 
 La siguiente es una guía básica y mínima para poder desplegar Siat en un entorno de desarrollo estándar o de evaluación.
 
 Importante: Las características de Hardware y pasos a seguir para la instalación pueden diferir para instancias de producción dependiendo de las necesidades y volumen de la implementación.
 
-# Probar SIAT
+## Probar SIAT
 
 http://siat.tecso.coop/demo.html
 
-# Bajar contenidos del Proyecto Siat
+## Bajar contenidos del Proyecto Siat
 
 Código Fuente: /src
 
@@ -19,20 +19,20 @@ Bajar Binario Siat: bin/siat-1.0-bin.tar.gz
 
 Documentación de Analisis y Diseño: doc/eaSIAT.rar
 
-# Hardware Mínimo
+## Hardware Mínimo
 
     Intel Core 2 Duo 2.7Ghz o Similar AMD
     Memoria: 2GB minimo, 4GB recomendado
     HDD: 20GB Libres
 
-# Software Necesario
+## Software Necesario
 
     GNU/Linux 2.6.x
     Java JDK 1.6
     Apache Tomcat 7.x
     PostgreSQL 8.4 o mayor
 
-# Pre instalación
+## Pre instalación
 
 Por favor antes de comenzar verifique estos puntos.
 
@@ -42,12 +42,12 @@ Por favor antes de comenzar verifique estos puntos.
     Las variables de entornos requeridas por Tomcat están exportadas en su shell.
     Existe el locale es_AR.iso88591 en su sistema.
 
-# Unpack Siat
+## Unpack Siat
 
     $ tar zxvf siat-1.0-bin.tar.gz
     $ cd  siat-1.0
 
-# Crear Base de Datos
+## Crear Base de Datos
 
     $ sudo su - postgres
     $ psql  
@@ -57,12 +57,12 @@ Por favor antes de comenzar verifique estos puntos.
 
     $ psql -U siat -h localhost siatgpl < etc/database/pg/siatgpl.db > siatgpl.db.log 2>&1
 
-# Crear fileshare Siat
+## Crear fileshare Siat
 
     $ mkdir /mnt/siatgpl  (es posible que necesite permisos extras para este paso)
     $ cp -r etc/fileshare/* /mnt/siatgpl
 
-# Configurar Tomcat
+## Configurar Tomcat
 
 Se recomienda tener una instancia de Tomcat dedicada a Siat. En ese caso:
 
@@ -75,7 +75,7 @@ Agregar dos DataSource a la configuracíon de su Tomcat. Los datos pueden copiar
 
 Asegurarse que exista un driver jdbc de postgres en el dir /lib de su Tomcat
 
-# Desplegar Siat
+## Desplegar Siat
 
     $ export LANG=es_AR.iso88591
     $ export CATALINA_OPTS="-Xmx1200m  -XX:MaxPermSize=256m"
@@ -86,7 +86,7 @@ Asegurarse que exista un driver jdbc de postgres en el dir /lib de su Tomcat
     $ cp dist/adpsiat.war $CATALINA_HOME/webapps/
     $ catalina.sh start
 
-## NOTA: 
+### NOTA: 
 
 Verficar que "es_AR.iso88591" este en la lista al ejecutar:
 
@@ -94,13 +94,13 @@ Verficar que "es_AR.iso88591" este en la lista al ejecutar:
 
 Sino es así, crear este locale para su sistema.
 
-# Navegar Siat
+## Navegar Siat
 
 Ingresar a http://localhost:8080/siat
 
 Usuario: admin Password: admin
 
-# Posibles Problemas
+## Posibles Problemas
 
 Si tiene problemas al levantar la instancia puede ver información de error en $CATALINA_HOME/logs/catalina.out
 

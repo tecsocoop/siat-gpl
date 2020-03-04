@@ -14,7 +14,9 @@ http://siat.tecso.coop/demo.html
 # Bajar contenidos del Proyecto Siat
 
 Código Fuente: /src
+
 Bajar Binario Siat: bin/siat-1.0-bin.tar.gz
+
 Documentación de Analisis y Diseño: doc/eaSIAT.rar
 
 # Hardware Mínimo
@@ -42,61 +44,65 @@ Por favor antes de comenzar verifique estos puntos.
 
 # Unpack Siat
 
-$ tar zxvf siat-1.0-bin.tar.gz
-$ cd  siat-1.0
+    $ tar zxvf siat-1.0-bin.tar.gz
+    $ cd  siat-1.0
 
 # Crear Base de Datos
 
-$ sudo su - postgres
-$ psql  
-  => create user siat password 'siat' login;
-  => create database siatgpl with owner siat template template0 encoding 'utf-8';
-  => \q
+    $ sudo su - postgres
+    $ psql  
+        => create user siat password 'siat' login;
+        => create database siatgpl with owner siat template template0 encoding 'utf-8';
+        => \q
 
-$ psql -U siat -h localhost siatgpl < etc/database/pg/siatgpl.db > siatgpl.db.log 2>&1
+    $ psql -U siat -h localhost siatgpl < etc/database/pg/siatgpl.db > siatgpl.db.log 2>&1
 
 # Crear fileshare Siat
 
-$ mkdir /mnt/siatgpl  (es posible que necesite permisos extras para este paso)
-$ cp -r etc/fileshare/* /mnt/siatgpl
+    $ mkdir /mnt/siatgpl  (es posible que necesite permisos extras para este paso)
+    $ cp -r etc/fileshare/* /mnt/siatgpl
 
 # Configurar Tomcat
 
 Se recomienda tener una instancia de Tomcat dedicada a Siat. En ese caso:
 
-$ cp etc/tomcat/conf/server.xml-minimal $CATALINA_HOME/conf/server.xml
-$ cp etc/tomcat/lib/* $CATALINA_HOME/lib
+    $ cp etc/tomcat/conf/server.xml-minimal $CATALINA_HOME/conf/server.xml
+    $ cp etc/tomcat/lib/* $CATALINA_HOME/lib
 
 Si no:
 
-    Agregar dos DataSource a la configuracíon de su Tomcat. Los datos pueden copiarse de etc/tomcat/conf/server.xml-minimal
+Agregar dos DataSource a la configuracíon de su Tomcat. Los datos pueden copiarse de etc/tomcat/conf/server.xml-minimal
 
-    Asegurarse que exista un driver jdbc de postgres en el dir /lib de su Tomcat
+Asegurarse que exista un driver jdbc de postgres en el dir /lib de su Tomcat
 
 # Desplegar Siat
 
-$ export LANG=es_AR.iso88591
-$ export CATALINA_OPTS="-Xmx1200m  -XX:MaxPermSize=256m"
-$ export SWE_CHECKLOGIN=off
-$
-$ catalina.sh stop
-$ cp dist/siat.war $CATALINA_HOME/webapps/
-$ cp dist/adpsiat.war $CATALINA_HOME/webapps/
-$ catalina.sh start
+    $ export LANG=es_AR.iso88591
+    $ export CATALINA_OPTS="-Xmx1200m  -XX:MaxPermSize=256m"
+    $ export SWE_CHECKLOGIN=off
+    $
+    $ catalina.sh stop
+    $ cp dist/siat.war $CATALINA_HOME/webapps/
+    $ cp dist/adpsiat.war $CATALINA_HOME/webapps/
+    $ catalina.sh start
 
-* nota:
-* Verficar que "es_AR.iso88591" este en la lista al ejecutar:
-* locale -a
-* Sino es así, crear este locale para su sistema.
+## NOTA: 
+
+Verficar que "es_AR.iso88591" este en la lista al ejecutar:
+
+    $ locale -a
+
+Sino es así, crear este locale para su sistema.
 
 # Navegar Siat
 
-    Ingresar a http://localhost:8080/siat
-    Usuario: admin Password: admin
+Ingresar a http://localhost:8080/siat
+
+Usuario: admin Password: admin
 
 # Posibles Problemas
 
-    Si tiene problemas al levantar la instancia puede ver información de error en $CATALINA_HOME/logs/catalina.out
+Si tiene problemas al levantar la instancia puede ver información de error en $CATALINA_HOME/logs/catalina.out
 
-    También puede enviar un mail a siat@tecso.coop y en lo posible trataremos de ayudarlo.
+También puede enviar un mail a siat@tecso.coop y en lo posible trataremos de ayudarlo.
 
